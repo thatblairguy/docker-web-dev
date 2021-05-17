@@ -1,0 +1,45 @@
+version: "3.7"
+
+services:
+
+  web:
+    ## Use the web folder
+    build:
+      context: web
+    volumes:
+      ## The site root
+      - ./content/:/var/www
+      - ./sites-enabled/:/etc/apache2/sites-enabled
+      - ./sites-enabled/:/etc/apache2/sites-available
+      # Configuration items
+      - ./web/runtime/apache2.conf:/etc/apache2/apache2.conf
+
+    restart: always
+    ports:
+      - "80:80"
+    networks:
+      shoreleave_web:
+    depends_on:
+      - db
+
+  db:
+    image: mariadb:10.4-bionic
+    environment:
+      - MYSQL_ROOT_PASSWORD=not-a-good-password
+      - MYSQL_DATABASE=wordpress
+      - MYSQL_USER=wordpressuser
+      - MYSQL_PASSWORD=wordpresspass
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./data:/var/lib/mysql
+      # Works around an issue with the mariadb image when its data directory is
+      # mounted to a location on a Win10 host system. Details at:
+      # https://github.com/docker-library/mariadb/issues/38#issuecomment-385845282
+      - ./db/innodb-fix.cnf:/etc/mysql/conf.d/innodb-fix.cnf
+    networks:
+      shoreleave_web:
+
+
+networks:
+  shoreleave_web:
