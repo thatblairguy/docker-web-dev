@@ -2,7 +2,7 @@ FROM ubuntu:focal
 
 # Update the package manager...
 # Install add-apt-repository
-# Add the PHP 7.3 repository
+# Add the PHP repository
 # ...then install packages.
 RUN     DEBIAN_FRONTEND=noninteractive  apt-get update -y;                                \
         DEBIAN_FRONTEND=noninteractive  apt-get install -yq software-properties-common;  \
@@ -11,27 +11,25 @@ RUN     DEBIAN_FRONTEND=noninteractive  apt-get update -y;                      
         DEBIAN_FRONTEND=noninteractive  apt-get install -yq                              \
         apache2                 \
         build-essential         \
-        php7.4                  \
-        libapache2-mod-php7.4   \
-        php7.4-bz2              \
-        php7.4-cli              \
-        php7.4-common           \
-        php7.4-curl             \
-        php7.4-fpm              \
-        php7.4-gd               \
-        php7.4-imagick          \
-        php7.4-json             \
-        php7.4-mbstring         \
-        php7.4-memcached        \
-        php7.4-mysql            \
-        php7.4-oauth            \
-        php7.4-opcache          \
-        php7.4-readline         \
-        php7.4-sqlite3          \
-        php7.4-soap             \
-        php7.4-xdebug           \
-        php7.4-xml              \
-        php7.4-zip              \
+        php8.2                  \
+        libapache2-mod-php8.2   \
+        php8.2-bz2              \
+        php8.2-cli              \
+        php8.2-common           \
+        php8.2-curl             \
+        php8.2-fpm              \
+        php8.2-gd               \
+        php8.2-mbstring         \
+        php8.2-memcached        \
+        php8.2-imagick          \
+        php8.2-mysql            \
+        php8.2-oauth            \
+        php8.2-opcache          \
+        php8.2-readline         \
+        php8.2-sqlite3          \
+        php8.2-soap             \
+        php8.2-xdebug           \
+        php8.2-xml              \
         mariadb-client          \
         curl                    \
         git                     \
@@ -68,25 +66,27 @@ RUN chmod +x /usr/local/bin/docker-entrypoint.sh
 
 # Install Node
 # nvm environment variables
-ENV NVM_DIR /usr/local/nvm
-ENV NODE_VERSION 14.16.0
+# NVM_DIR="$HOME/.nvm"
+#ENV NVM_DIR /root/nvm
+# ENV NVM_DIR /usr/local/nvm
+# ENV NODE_VERSION 20.13.0
 
 # install nvm
-# https://github.com/creationix/nvm#install-script
-RUN curl --silent -o- https://raw.githubusercontent.com/creationix/nvm/v0.31.2/install.sh | bash
+# https://github.com/nvm-sh/nvm
+#RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
 
 # install node and npm
-RUN . $NVM_DIR/nvm.sh \
-    && nvm install $NODE_VERSION \
-    && nvm alias default $NODE_VERSION \
-    && nvm use default
+# RUN . $NVM_DIR/nvm.sh \
+#     && nvm install $NODE_VERSION \
+#     && nvm alias default $NODE_VERSION \
+#     && nvm use default
 
-# add node and npm to path so the commands are available
-ENV NODE_PATH $NVM_DIR/v$NODE_VERSION/lib/node_modules
-ENV PATH $NVM_DIR/versions/node/v$NODE_VERSION/bin:$PATH
+# # add node and npm to path so the commands are available
+# ENV NODE_PATH $NVM_DIR/v$NODE_VERSION/lib/node_modules
+# ENV PATH $NVM_DIR/versions/node/v$NODE_VERSION/bin:$PATH
 
-# update npm
-RUN npm install -g npm@7.6
+# # update npm
+# RUN npm install -g npm@7.6
 
 ## Turn off xdebug as it uses resources that could be best used
 ## elsewhere. Once the container is up you can use

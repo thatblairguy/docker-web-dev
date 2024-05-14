@@ -1,0 +1,5 @@
+services:
+
+  web:
+    volumes:
+      - /Users/blairlearn/projects/shore-leave/webs/admin:/var/www/admindev.shore-leave.com
