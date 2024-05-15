@@ -11,25 +11,25 @@ RUN     DEBIAN_FRONTEND=noninteractive  apt-get update -y;                      
         DEBIAN_FRONTEND=noninteractive  apt-get install -yq                              \
         apache2                 \
         build-essential         \
-        php8.2                  \
-        libapache2-mod-php8.2   \
-        php8.2-bz2              \
-        php8.2-cli              \
-        php8.2-common           \
-        php8.2-curl             \
-        php8.2-fpm              \
-        php8.2-gd               \
-        php8.2-mbstring         \
-        php8.2-memcached        \
-        php8.2-imagick          \
-        php8.2-mysql            \
-        php8.2-oauth            \
-        php8.2-opcache          \
-        php8.2-readline         \
-        php8.2-sqlite3          \
-        php8.2-soap             \
-        php8.2-xdebug           \
-        php8.2-xml              \
+        php7.4                  \
+        libapache2-mod-php7.4   \
+        php7.4-bz2              \
+        php7.4-cli              \
+        php7.4-common           \
+        php7.4-curl             \
+        php7.4-fpm              \
+        php7.4-gd               \
+        php7.4-mbstring         \
+        php7.4-memcached        \
+        php7.4-imagick          \
+        php7.4-mysql            \
+        php7.4-oauth            \
+        php7.4-opcache          \
+        php7.4-readline         \
+        php7.4-sqlite3          \
+        php7.4-soap             \
+        php7.4-xdebug           \
+        php7.4-xml              \
         mariadb-client          \
         curl                    \
         git                     \
