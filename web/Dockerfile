@@ -1,4 +1,4 @@
-FROM ubuntu:focal
+FROM ubuntu:24.04
 
 # Update the package manager...
 # Install add-apt-repository
@@ -11,25 +11,25 @@ RUN     DEBIAN_FRONTEND=noninteractive  apt-get update -y;                      
         DEBIAN_FRONTEND=noninteractive  apt-get install -yq                              \
         apache2                 \
         build-essential         \
-        php7.4                  \
-        libapache2-mod-php7.4   \
-        php7.4-bz2              \
-        php7.4-cli              \
-        php7.4-common           \
-        php7.4-curl             \
-        php7.4-fpm              \
-        php7.4-gd               \
-        php7.4-mbstring         \
-        php7.4-memcached        \
-        php7.4-imagick          \
-        php7.4-mysql            \
-        php7.4-oauth            \
-        php7.4-opcache          \
-        php7.4-readline         \
-        php7.4-sqlite3          \
-        php7.4-soap             \
-        php7.4-xdebug           \
-        php7.4-xml              \
+        php8.4                  \
+        libapache2-mod-php8.4   \
+        php8.4-bz2              \
+        php8.4-cli              \
+        php8.4-common           \
+        php8.4-curl             \
+        php8.4-fpm              \
+        php8.4-gd               \
+        php8.4-mbstring         \
+        php8.4-memcached        \
+        php8.4-imagick          \
+        php8.4-mysql            \
+        php8.4-oauth            \
+        php8.4-opcache          \
+        php8.4-readline         \
+        php8.4-sqlite3          \
+        php8.4-soap             \
+        php8.4-xdebug           \
+        php8.4-xml              \
         mariadb-client          \
         curl                    \
         git                     \
@@ -50,9 +50,10 @@ COPY ./build/000-default.conf /etc/apache2/sites-available/000-default.conf
 # ##
 # COPY ./build/php-conf /etc/php/7.3/mods-available
 
-# Enable mod_rewrite 'cause we needs it.
-RUN a2enmod rewrite
 RUN a2enmod include
+RUN a2enmod proxy
+RUN a2enmod proxy_http
+RUN a2enmod rewrite
 
 # Forward logs to docker log collector.
 RUN ln -sf /dev/stdout /var/log/apache2/access.log &&               \
